@@ -25,13 +25,10 @@ psycopg2==2.9.1
 psycopg2-binary==2.9.1
 pycparser==2.20
 pypiwin32==223
-pyttsx3==2.90
 pywin32==300
 requests==2.26.0
 six==1.16.0
 SpeechRecognition==3.8.1
 SQLAlchemy==1.4.23
 urllib3==1.26.6
-virtualenv==20.8.0
-virtualenv-clone==0.5.7
 Werkzeug==2.0.1
