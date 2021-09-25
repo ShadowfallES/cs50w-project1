@@ -5,7 +5,11 @@ name = "pypi"
 
 [packages]
 python-dotenv = "*"
-Flask = "*"
+flask = "*"
+sqlalchemy = "*"
+psycopg2-binary = "*"
+flask-session = "*"
+gunicorn = "*"
 [dev-packages]
 
 [requires]

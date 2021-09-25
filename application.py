@@ -1,6 +1,6 @@
 import os
 from re import template
-import re
+import re 
 from requests import api
 
 from sqlalchemy.sql.elements import not_
@@ -14,12 +14,13 @@ from sqlalchemy.orm import query, scoped_session, sessionmaker
 from flask_bcrypt import Bcrypt, check_password_hash,generate_password_hash
 import requests
 import json
+import secrets
  
 app = Flask(__name__)
 
 # Check for environment variable
-if not os.getenv("DATABASE_URL"):
-    raise RuntimeError("DATABASE_URL is not set")
+if not os.getenv("DB_URL"):
+    raise RuntimeError("DB_URL is not set")
 
 # Configure session to use filesystem
 app.config["SESSION_PERMANENT"] = False
@@ -27,8 +28,12 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Set up database
-engine = create_engine(os.getenv("DATABASE_URL"))
+engine = create_engine(os.getenv("DB_URL"))
 db = scoped_session(sessionmaker(bind=engine))
+
+# Secrets Key
+secret_key = secrets.token_hex(16)
+app.config["SECRET_KEY"] = secret_key
 
 @app.route("/")
 @login_required
