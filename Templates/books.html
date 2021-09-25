@@ -1,0 +1,104 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Books
+{% endblock %}
+{%block style%}
+<link href="{{ url_for('static',filename='css/books.css')}}" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+{%endblock%}
+
+{% block main %}
+<header>
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{category}}" role="alert"><h2>{{ message }}</h2> </div>
+  {% endfor %}
+</header>
+<main class="container">
+    <div class="row py-1 rounded">
+      <div class="col-6 cover bg-light">
+        <img src="{{imagen}}" alt="Libro" class="imgbook my-4 rounded mx-auto d-block">
+      </div>
+      <div class="col-6 descripcion ">
+        <div class="card-body">
+          <h4>Información bibliográfica</h4>
+          {%for paracetamols in parecetamol %}
+          <ul>
+              <li><strong>Titulo:&nbsp;</strong>{{paracetamols.title}}</li>
+              <li><strong>Autor:&nbsp;</strong>{{paracetamols.autor}}</li>
+              <li><strong>Año:&nbsp;</strong>{{paracetamols.year}}</li>
+              <li><strong>ISBN:&nbsp;</strong>{{paracetamols.isbn}}</li>
+              <li><strong>N.º de páginas:&nbsp;</strong>{{Pagina}}</li>
+              <li><strong>Fecha de publicación:&nbsp;</strong>{{publicacion}}</li>
+              <li><strong>Recuento de calificaciones:&nbsp;</strong>{{Contador}}</li>
+              <li><strong>Clasificación:&nbsp;</strong>{{rating}}</li>
+              <li><strong>Editor:&nbsp;</strong>{{editor}}</li>
+          </ul>
+          {%endfor%}
+          <h4 class="pt-2">Descripcion</h4>
+          <p class="card-text">
+          {{descripcion}}
+          </p>
+        </div>
+      </div>
+      <div class="col-12 pt-2">
+        <div class="card">
+          <div class="card-body">
+            <h3>Escribir una reseña</h3>
+            <form method="POST">
+              <div class="form-group col-lg-auto">
+                <textarea name="comentarios" class="form-control comentario" rows="5" placeholder="Comparte tu opinión con las demas personas!"  required></textarea>
+              </div>
+              <div class="row">
+                <div class="col-6">
+                  <button type="submit" class="btn btn-primary btn-lg">Enviar</button> 
+                </div>
+                  <div class="col-6 Rating"> 
+                    <div class="star-widget">
+                      <input type="radio" name="rate" id="rate-5" value="5">
+                      <label for="rate-5" class="fas fa-star"></label>
+                      <input type="radio" name="rate" id="rate-4" value="4">
+                      <label for="rate-4" class="fas fa-star"></label>
+                      <input type="radio" name="rate" id="rate-3" value="3">
+                      <label for="rate-3" class="fas fa-star"></label>
+                      <input type="radio" name="rate" id="rate-2" value="2">
+                      <label for="rate-2" class="fas fa-star"></label>
+                      <input type="radio" name="rate" id="rate-1" value="1">
+                      <label for="rate-1" class="fas fa-star"></label>
+                      <h4>Puntuacion:&nbsp;&nbsp;</h4>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div> 
+          </div>
+      </div>
+      <div class="col-12 py-2">
+        <div class="card">
+          <div class="card-body">
+            <h3>Comentarios de usuarios</h3>
+            <div class="form-group col-lg-auto">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col" class="col-2">Usuario</th>
+                    <th scope="col" class="col-7">Comentario</th>
+                    <th scope="col" class="col-3">Rating</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%for Review in Reviews %}
+                  <tr>
+                    <td>{{Review.username}}</td>
+                    <td><p>{{Review.comentario}}</p></td>
+                    <td>{{Review.puntaje}}</td>
+                  </tr>
+                  {%endfor%}
+                </tbody>
+            </div>
+        </div>
+      </div>
+      </div>
+    </div>      
+</main>
+{%endblock%}

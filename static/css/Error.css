@@ -1,0 +1,13 @@
+body form .error{
+    padding-top: 2%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+}
+body form h1{
+    padding-top: 100px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    text-align: center;
+}
+  

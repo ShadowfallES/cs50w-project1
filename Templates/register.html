@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link href="{{ url_for('static',filename='css/style.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static',filename='css/form.css')}}" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <header>
+                    {% for category, message in get_flashed_messages(with_categories=True) %}
+                    <div class="alert-{{category}}"><h2>{{ message }}</h2></div>
+                    {% endfor %}
+    </header>
+    <div class="Contenedor">
+        <div>
+            <img src="{{ url_for('static',filename='img/ebook.png')}}" alt="Ebooks"class="imgEbooks rounded mx-auto d-block"><h1>Registrar</h1>
+        </div>
+        <form action="/register" method="POST">    
+            <div class="Datos_request">
+                <input type="text" name="username"  required>
+                <span></span>
+                <label>username</label>
+            </div>
+            <div class="Datos_request">
+                <input type="password" name="password" required>
+                <span></span>
+                <label>Contraseña</label>
+            </div>
+            <div class="Datos_request">
+                <input type="password" name="checkpassword" required>
+                <span></span>
+                <label>Repetir constraseña</label>
+            </div> 
+            <div class="btn">
+                <button type="submit" class="btn btn-primary btn-lg">Registrar</button>
+            </div>
+            <div class="link_ref">
+                Ya tiene una cuenta? <a href="/login">inicia sesión</a>
+            </div>
+            </form>
+        </div>
+        
+    </main>
+</body>
+</html>

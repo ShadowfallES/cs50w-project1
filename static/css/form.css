@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+body{
+  font-family: 'Montserrat', sans-serif;
+  background: #faeee7;
+}
+
+.Contenedor{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: auto;
+    background: #fffffe;
+    border-radius: 10px;  
+}
+.Contenedor h1{
+  text-align: center;
+  padding: 0 0 20px 0;
+}
+.Contenedor form{
+    padding: 0 40px;
+    box-sizing: border-box;
+  }
+form .Datos_request{
+    position: relative;
+    border-bottom: 2px solid #adadad;
+    margin: 30px 0;
+}
+.Datos_request input{
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
+  }
+.Datos_request label{
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  color: #adadad;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+  transition: .5s;
+}
+.Datos_request span::before{
+content: '';
+position: absolute;
+top: 40px;
+left: 0;
+width: 0%;
+height: 2px;
+background: #2691d9;
+transition: .5s;
+}
+.Datos_request input:focus ~ label,
+.Datos_request input:valid ~ label {
+  top: -5px;
+  color: #2691d9;
+}
+.Datos_request input:focus ~ span::before,
+.Datos_request input:valid ~ span::before {
+width: 100%;
+}
+.btn{         
+display: flex;
+justify-content:center;
+align-items:center;
+}
+.link_ref{
+margin: 30px 0;
+text-align: center;
+font-size: 16px;
+color: #666666;
+}
+.link_ref a{
+color: #2691d9;
+text-decoration: none;
+}
+.link_ref a:hover{
+text-decoration: underline;
+}
+.imgEbooks{
+  width: 20%;
+}

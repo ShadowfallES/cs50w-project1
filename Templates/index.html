@@ -1,0 +1,37 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Ebooks
+{% endblock %}
+
+{% block main %}
+<header>
+  {% for category, message in get_flashed_messages(with_categories=True) %}
+  <div class="alert alert-{{category}}"><h2>{{ message }}</h2></div>
+  {% endfor %}
+</header>
+<main class="container-fluid">
+<table class="table">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">ISBN</th>
+      <th scope="col">TITLE</th>
+      <th scope="col">AUTOR</th>
+      <th scope="col">YEAR</th>
+    </tr>
+  </thead>
+  <tbody>
+    {%for books in book %}
+    <tr>
+      <th scope="row">#</th>
+      <td>{{books.isbn}}</td>
+      <td><a href="/BooksPages/{{books['isbn']}}" >{{books.title}}</a></td>
+      <td>{{books.autor}}</td>
+      <td>{{books.year}}</td>
+    </tr>
+    {%endfor%}
+  </tbody>
+</table>
+</main>
+{%endblock%}
