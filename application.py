@@ -33,21 +33,13 @@ db = scoped_session(sessionmaker(bind=engine))
 @app.route("/", defaults={'page':1})
 @app.route("/page/<int:page>")
 @login_required
-def index(page):
-    page = request.args.get(get_page_parameter(),type=int, default=1)
-    limit=20
-    offset = page * limit - limit
+def index():
 
-    resultado = db.execute("Select * from books").fetchall()
-    
-    total = len(resultado)
-    print("TOTALES---", total)
     # Almacenamos en unas variables la ejecucion de la base de datos
-    book = db.execute("Select * from books order by id_books asc Limit :l OFFSET :o", {"l":limit,"o":offset}).fetchall()
+    book = db.execute("SELECT * FROM books LIMIT 50")
     
     # Retornamos al usuario a la pagina con los datos generado anteriormente
-    pagination = Pagination(page=page, per_page=limit, total=total, record_name='index')
-    return render_template("index.html", book=book, pagination=pagination)
+    return render_template("index.html", book=book)
 
 @app.route("/search", methods=["GET", "POST"])
 @login_required
