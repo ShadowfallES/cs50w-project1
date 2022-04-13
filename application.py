@@ -1,19 +1,16 @@
 import os
 from re import template
-import re 
 from requests import api
-
+from flask_paginate import Pagination, get_page_parameter
 from sqlalchemy.sql.elements import not_
 from sqlalchemy.sql.expression import null, update
 from helpers import login_required
-
-from flask import Flask, session, redirect, render_template, request, url_for, flash, jsonify
+from flask import Flask, session, redirect, render_template, request, flash, jsonify
 from flask_session import Session
 from sqlalchemy import create_engine, select
 from sqlalchemy.orm import query, scoped_session, sessionmaker
 from flask_bcrypt import Bcrypt, check_password_hash,generate_password_hash
 import requests
-import json
  
 app = Flask(__name__)
 
@@ -32,15 +29,25 @@ Session(app)
 engine = create_engine(os.getenv("DB_URL"))
 db = scoped_session(sessionmaker(bind=engine))
 
-@app.route("/")
-@login_required
-def index():
 
+@app.route("/", defaults={'page':1})
+@app.route("/page/<int:page>")
+@login_required
+def index(page):
+    page = request.args.get(get_page_parameter(),type=int, default=1)
+    limit=20
+    offset = page * limit - limit
+
+    resultado = db.execute("Select * from books").fetchall()
+    
+    total = len(resultado)
+    print("TOTALES---", total)
     # Almacenamos en unas variables la ejecucion de la base de datos
-    book = db.execute("SELECT * FROM books LIMIT 50")
+    book = db.execute("Select * from books order by id_books asc Limit :l OFFSET :o", {"l":limit,"o":offset}).fetchall()
     
     # Retornamos al usuario a la pagina con los datos generado anteriormente
-    return render_template("index.html", book=book)
+    pagination = Pagination(page=page, per_page=limit, total=total, record_name='index')
+    return render_template("index.html", book=book, pagination=pagination)
 
 @app.route("/search", methods=["GET", "POST"])
 @login_required
@@ -333,8 +340,7 @@ def my_api(isbn):
 
     if not myAPI:
         return render_template("404.html")
-
-
+        
     # Si myAPI.average no es null me retorna valor flotante
     if myAPI.average is not None:
        average = float(myAPI.average)

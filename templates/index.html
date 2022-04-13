@@ -24,7 +24,7 @@ Ebooks
   <tbody>
     {%for books in book %}
     <tr>
-      <th scope="row">#</th>
+      <th scope="row">{{books.id_books}}</th>
       <td>{{books.isbn}}</td>
       <td><a href="/BooksPages/{{books['isbn']}}" >{{books.title}}</a></td>
       <td>{{books.autor}}</td>
@@ -33,5 +33,18 @@ Ebooks
     {%endfor%}
   </tbody>
 </table>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item ">
+      {% if book.has_next %}<a class="page-link" href="{{ url_for('/', page=pagination.next_num) }}" tabindex="-1">Previous</a> {% else %} <a class="page-link disabled" href="#" tabindex="-1">Previous</a> {% endif %}
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      {% if book.has_next %}<a class="page-link" href="{{ url_for('/', page=pagination.next_num) }}" tabindex="-1">Next</a> {% else %} <a class="page-link disabled" href="#" tabindex="-1">Next</a> {% endif %}
+    </li>
+  </ul>
+</nav>
 </main>
 {%endblock%}
