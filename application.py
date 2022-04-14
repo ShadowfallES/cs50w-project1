@@ -2,7 +2,6 @@ import os
 from re import template
 import re
 from requests import api
-from dotenv import load_dotenv
 from sqlalchemy.sql.elements import not_
 from sqlalchemy.sql.expression import null, update
 from helpers import login_required
@@ -16,7 +15,7 @@ import requests
 import json
  
 app = Flask(__name__)
-load_dotenv("./env")
+
 # Check for environment variable
 if not os.getenv("DB_URL"):
     raise RuntimeError("DB_URL is not set")
