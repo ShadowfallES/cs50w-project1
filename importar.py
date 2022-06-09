@@ -4,11 +4,11 @@ import csv
 
 #Varible que almacena credenciales 
 #Datos de importancia las credenciales pueden variar cierto tiempo
-db_host = "ec2-54-90-13-87.compute-1.amazonaws.com"
+db_host  =  ""
 db_name = "d1laovdg348joa"
 db_user = "oejpzdxrxukxkt"
-db_pass = "6bb603abdbc625651e0a8fea923fbb6dfe615f03bdbe954e9add5b9019717426"
-db_port = "5432"
+db_pass  = ""
+db_port  = ""
 
 #Conexion de la base datos Postgres
 conexion = psycopg2.connect(dbname=db_name, user=db_user, password=db_pass, host=db_host, port=db_port)
